@@ -2,7 +2,7 @@
   <div id="app">
     <!--<img src="./assets/logo.png">-->
     <router-view></router-view>
-    <appFooter></appFooter>
+    <appFooter :message="parentMsg"></appFooter>
     <!--<helloworld></helloworld>-->
   </div>
 </template>
@@ -12,6 +12,11 @@ import appFooter from './components/appFooter'
 // import helloworld from './components/HelloWorld'
 export default {
   name: 'App',
+  data(){
+    return{
+      parentMsg: 'a message from parent'
+    }
+  },
   components: {
     appFooter,
     // helloworld

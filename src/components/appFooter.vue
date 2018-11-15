@@ -1,5 +1,7 @@
 <template>
   <div>
+    <p>dsfdg</p>
+    <p>{{message}}</p>
     <yd-tabbar fixed>
       <yd-tabbar-item :title="item.title" :link="item.path" v-for="item in list" :active="item.active">
          <yd-icon :name="item.name" slot="icon" size="0.54rem"></yd-icon>
@@ -25,6 +27,7 @@
 <script>
   export default {
     name: "appFooter",
+    props:['message'],
     data() {
       return {
         current: true,

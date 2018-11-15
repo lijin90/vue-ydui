@@ -1,5 +1,7 @@
 <template>
   <div id="content">
+    <img src="../../static/images/gif.gif" alt="" class="loading" v-show="show">
+
     <!--{{$store.state.count}}-->
     <!--<button @click="$store.commit('increment')">+</button>-->
     <!--<button @click="$store.commit('decrement')">-</button>-->

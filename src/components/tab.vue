@@ -1,6 +1,22 @@
 <template>
   <div class="tab">
-    <div >#动态组件实现tab切换效果#</div>　　
+
+    <div ref="mybox">dfdgfd</div>
+    <p @click="own" v-once>{{msg}}</p>
+    <p>{{msg}}</p>
+    <input type="text" v-model="msg">
+    <!-- 准备实现需求：
+    在h1标签上面，加上一个按钮，当点击按钮时候，对count实现一次
+    自增操作，当count等于5的时候，在控制台输出‘it is a test’
+    -->
+    <button @click="handleClick">clickMe</button>
+    <h1
+      v-if="count < 6"
+      v-change="count">it is a custom directive</h1>
+    <div >#动态组件实现tab切换效果#{{jisuan}}</div>　　
+    <ul>
+      <li @click="typeStyle" v-for="item in arr"><span>ewrew</span>{{item}}</li>
+    </ul>
     <div>
       <ul>
         <li v-for="item,index in arrList" :class="{active:currentIndex==index}" @click=tab(index,item.index)>
@@ -22,6 +38,10 @@
     name: "tab",
     data() {
       return {
+        msg: 'Hello Vue',
+        count:0,
+        num:1,
+        arr:[111,222,333,444,555],
         arrList: [
           {'name': '数据', index: 'first'},
           {'name': '进度', index: 'second'},
@@ -34,14 +54,56 @@
         currentView: 'first', //默认选中first子组件
       }
     },
+    computed:{
+      jisuan:function(){
+        return this.num*3
+      }
+    },
     components: {
       first,
       second,
+    },
+    methods: {
+      own:function(){
+        console.log(this.msg)
+      },
+      handleClick: function () {
+        //按钮单击，count自增
+        this.count++;
+        this.$set(this.arrList,0,{name:"Change Test",index:'10'})
+
+      },
+      typeStyle: function (e) {
+
+        var el = e.target;
+        // var el = e.currentTarget;
+        $(el).css("border","1px solid  #e4007f");
+
+        $(el).children("span").css("display","block");
+
+      },
+      init() {
+        const self = this;
+        this.$refs.mybox.style.color = 'green';
+        setTimeout(() => {
+          self.$refs.mybox.style.color = 'yellow';
+        },2000)
+      },
+
+      tab: function (index, module) {
+        this.currentIndex = index
+        this.currentView = module;
+      }
+      ,
+      // toggleTabs(tabText) {
+      //   this.currentView = tabText;
+      // }
     },
     created(){
       var that=this;
       that.cc=that.$route.query.id
       console.log(that.cc)
+      that.msg='nexttik'
     },
     // created() {
     //   var that = this;
@@ -71,16 +133,34 @@
     //     }
     //   },
     // },
+  mounted(){
+    this.init();
+  },
 
-    methods: {
-      tab: function (index, module) {
-        this.currentIndex = index
-        this.currentView = module;
+    directives:{
+      change:{
+        bind: function (el,bindings) {
+          console.log('指令已经绑定到元素了');
+          console.log(el);
+          console.log(bindings);
+          //准备将传递来的参数
+          // 显示在调用该指令的元素的innerHTML
+          el.innerHTML = bindings.value;
+        },
+        update: function (el,bindings) {
+          console.log('指令的数据有所变化');
+          console.log(el);
+          console.log(bindings);
+          el.innerHTML = bindings.value;
+          if(bindings.value == 5)
+          {
+            console.log(' it is a test');
+          }
+        },
+        unbind: function () {
+          console.log('解除绑定了');
+        }
       }
-      ,
-      // toggleTabs(tabText) {
-      //   this.currentView = tabText;
-      // }
     }
   }
 </script>
@@ -93,7 +173,9 @@
   ul {
     width: 100%;
   }
-
+  ul li span{
+    display: none;
+  }
   ul li {
     float: left;
     width: 50%;

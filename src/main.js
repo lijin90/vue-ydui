@@ -8,6 +8,7 @@ import 'vue-ydui/dist/ydui.rem.css';
 import axios from "axios"
 import VueJsonp from 'vue-jsonp'
 // import Vuex from 'vuex'
+import $ from 'jquery'
 import store from './store/store.js'
 Vue.prototype.$axios=axios
 /* 使用px：import 'vue-ydui/dist/ydui.px.css'; */
