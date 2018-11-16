@@ -1,6 +1,7 @@
 <template>
   <div class="tab">
-
+    <p>接受兄弟通信{{jieshou}}</p>
+    <p>{{methodsTest()}}</p>
     <div ref="mybox">dfdgfd</div>
     <p @click="own" v-once>{{msg}}</p>
     <p>{{msg}}</p>
@@ -32,12 +33,14 @@
 </template>
 
 <script>
+  import bus from "../assets/bus"
   import first from './tabs/dataList';
   import second from './tabs/pregress';
   export default {
     name: "tab",
     data() {
       return {
+        jieshou:'',
         msg: 'Hello Vue',
         count:0,
         num:1,
@@ -64,6 +67,9 @@
       second,
     },
     methods: {
+      methodsTest:function(){
+        return this.msg
+      },
       own:function(){
         console.log(this.msg)
       },
@@ -101,6 +107,9 @@
     },
     created(){
       var that=this;
+      bus.$on("eventTarget",v=>{
+        that.jieshou=v
+      });
       that.cc=that.$route.query.id
       console.log(that.cc)
       that.msg='nexttik'

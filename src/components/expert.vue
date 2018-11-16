@@ -1,5 +1,7 @@
 <template>
   <div id="expert">
+   <first></first>
+    <second></second>
     <img src="../../static/images/gif.gif" alt="" class="loading" v-show="show">
     <div class="everyOne" v-for="item in expertList">
       <yd-flexbox>
@@ -22,12 +24,25 @@
 </template>
 
 <script>
+  // import bus from "../assets/bus"
+  import first from './tabs/dataList';
+  import second from './tabs/pregress';
   export default {
     name: 'expert',
     data() {
       return {
         expertList: [],
         show: true
+      }
+    },
+    components: {
+      first,
+      second,
+    },
+    methods:{
+      handle() {
+        //通过emit触发事件，并传值
+        bus.$emit("eventTarget", "我要加油");
       }
     },
     created() {
