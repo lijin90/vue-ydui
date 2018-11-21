@@ -7,6 +7,7 @@ import tabs from '@/components/tab'
 import luyou from '@/components/luyou'
 import luyouChild from '@/components/luyouChild'
 import pushLoading from '@/components/pushLoading'
+import checkbox from '@/components/checkbox'
 // import dataList from '@/components/tabs/dataList'
 // import pregress from '@/components/tabs/pregress'
 Vue.use(Router)
@@ -21,6 +22,11 @@ Vue.use(Router)
       path: '/zxDetail',
       name: 'zxDetail',
       component: zxDetail   // Home是组件的名字，这个路由对应跳转到的组件。。注意component没有加“s”.
+    },
+    {
+      path: '/checkbox',
+      name: 'checkbox',
+      component: checkbox   // Home是组件的名字，这个路由对应跳转到的组件。。注意component没有加“s”.
     },
     {
       path: '/tabs',

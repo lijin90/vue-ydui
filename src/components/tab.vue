@@ -1,6 +1,6 @@
 <template>
   <div class="tab">
-    <p>接受兄弟通信{{jieshou}}</p>
+    <p style="color: green;" class="yanse">接受兄弟通信{{jieshou}}</p>
     <p>{{methodsTest()}}</p>
     <div ref="mybox">dfdgfd</div>
     <p @click="own" v-once>{{msg}}</p>
@@ -40,6 +40,7 @@
     name: "tab",
     data() {
       return {
+
         jieshou:'',
         msg: 'Hello Vue',
         count:0,
@@ -60,7 +61,7 @@
     computed:{
       jisuan:function(){
         return this.num*3
-      }
+      },
     },
     components: {
       first,
@@ -175,21 +176,38 @@
 </script>
 
 <style scoped>
-  .active {
-    color: red;
-  }
+  /* 隐藏未编译的变量 */
 
-  ul {
-    width: 100%;
-  }
-  ul li span{
+  [v-cloak] {
     display: none;
   }
-  ul li {
-    float: left;
-    width: 50%;
-    text-align: center;
-    font-size: 0.24rem;
-    line-height: 0.4rem;
+
+  *{
+    margin:0;
+    padding:0;
   }
+
+  body{
+    font:15px/1.3 'Open Sans', sans-serif;
+    color: #5e5b64;
+    text-align:center;
+  }
+
+  a, a:visited {
+    outline:none;
+    color:#389dc1;
+  }
+
+  a:hover{
+    text-decoration:none;
+  }
+
+  section, footer, header, aside, nav{
+    display: block;
+  }
+
+
+.yanse{
+  color: red !important;
+}
 </style>

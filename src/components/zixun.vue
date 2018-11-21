@@ -1,5 +1,23 @@
 <template>
   <div id="content">
+    <div>
+      <input type="checkbox"
+             class="input-checkbox"
+             :checked="fruits.length===fruitIds.length && fruitIds.length"
+             @click="checkedAll" />
+      <label>全选</label>
+      <div v-for="fruite in fruits"
+           :key="fruite.id"
+           class="fruiteList">
+        <input type="checkbox"
+               :checked="fruitIds.indexOf(fruite.id)>=0"
+               name="checkboxinput"
+               class="input-checkbox"
+               @click="checkedOne(fruite.id)">
+        <label>{{fruite.value}}</label>
+      </div>
+      <button @click="deleteSome">Delete</button>
+    </div>
     <img src="../../static/images/gif.gif" alt="" class="loading" v-show="show">
 
     <!--{{$store.state.count}}-->
@@ -54,6 +72,22 @@
     name: "zixun",
     data() {
       return {
+        fruits: [{
+          id: '1',
+          value: '苹果'
+        }, {
+          id: '2',
+          value: '荔枝'
+        }, {
+          id: '3',
+          value: '香蕉'
+        }, {
+          id: '4',
+          value: '火龙果'
+        }],
+        fruitIds: ['1', '3', '4'],
+        // 初始化全选按钮, 默认不选
+        isCheckedAll: false,
         list: [],
         show: true,
         page: 1,
@@ -126,6 +160,30 @@
       });
     },
     methods: {
+      checkedOne (fruitId) {
+        let idIndex = this.fruitIds.indexOf(fruitId)
+        if (idIndex >= 0) {//如果已经包含就去除
+          this.fruitIds.splice(idIndex, 1)
+        } else {//如果没有包含就添加
+          this.fruitIds.push(fruitId)
+        }
+      },
+      checkedAll (e) {
+        this.isCheckedAll = e.target.checked;
+        if (this.isCheckedAll) {//全选时
+          this.fruitIds = []
+          this.fruits.forEach(item => {
+            this.fruitIds.push(item.id)
+          })
+        } else {
+          this.fruitIds = []
+        }
+      },
+      deleteSome () {
+        this.fruits = this.fruits.filter(item => this.fruitIds.indexOf(item.id) === -1)
+        this.fruitIds = []
+      },
+
       loadList() {
         console.log(this.page)
         var that = this;

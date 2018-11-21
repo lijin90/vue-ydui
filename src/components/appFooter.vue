@@ -34,6 +34,7 @@
         noCurrent: false,
         list: [
           {name: 'home', active: true, title: "资讯", path: '/'},
+          {name: 'home', active: true, title: "checkbox", path: '/checkbox'},
           {name: 'shopcart', active: false, title: "tab", path: '/tabs'},
           {name: 'shopcart', active: false, title: "专家", path: '/expert'},
           {name: 'home', active: false, title: "动态路由", path: '/luyou'},
